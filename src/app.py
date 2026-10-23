@@ -1,4 +1,10 @@
-from dotenv import load_dotenv
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
+
 import streamlit as st
 import os
 import json
@@ -10,7 +16,6 @@ from langchain_core.output_parsers import StrOutputParser
 from ingestion import load_and_chunk
 from retriever import hybrid_retriever_reranked
 
-load_dotenv()
 # Set API Key
 os.environ["GOOGLE_API_KEY"] = os.environ.get("GOOGLE_API_KEY")
 
@@ -127,6 +132,9 @@ if app_mode == "Hybrid RAG (Vector + BM25 + FlashRank)":
                 "question": user_input,
             })
 
+            with st.chat_message("assistant"):
+                st.markdown(response)
+
         st.session_state["display_msgs_hybrid"].append({"role": "assistant", "content": response})
 
 
@@ -183,5 +191,6 @@ Instructions:
                     contents=prompt,
                 )
                 response_text = response.text
+                st.markdown(response_text)
 
         st.session_state["display_msgs_vectorless"].append({"role": "assistant", "content": response_text})
