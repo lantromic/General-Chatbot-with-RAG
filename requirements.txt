@@ -1,0 +1,14 @@
+streamlit
+google-genai
+langchain-google-genai
+langchain-core
+langchain-community
+langchain-classic
+langchain-text-splitters
+chromadb
+pypdf
+rank-bm25
+flashrank
+sentence-transformers
+huggingface-hub
+python-dotenv
